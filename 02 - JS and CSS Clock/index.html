@@ -6,7 +6,6 @@
 </head>
 <body>
 
-
 <div class="clock">
     <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -14,7 +13,6 @@
         <div class="hand second-hand"></div>
     </div>
 </div>
-
 
 <style>
     html {
@@ -82,16 +80,13 @@
         const hours = now.getHours();
 
         const hoursDegrees = ((hours / 60) * 360 ) + 90;
-        const minutesDegrees = ((minutes / 60) * 360 )+ 90;
+        const minutesDegrees = ((minutes / 60) * 360 ) + 90;
         const secondsDegrees = ((seconds / 60 ) * 360) + 90;
 
         minutesHand.style.transform = `rotate(${minutesDegrees}deg)`;
         secondsHand.style.transform = `rotate(${secondsDegrees}deg)`;
         hoursHand.style.transform = `rotate(${hoursDegrees}deg)`;
-       
-
     }
-
     setInterval(setDate, 1000);
 </script>
 </body>
