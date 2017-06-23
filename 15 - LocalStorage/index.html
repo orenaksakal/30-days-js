@@ -23,12 +23,15 @@
         <input type="text" name="item" placeholder="Item Name" required>
         <input type="submit" value="+ Add Item">
     </form>
+    <button id="clear">Clear</button> <button id="toggleall">ToggleAll</button>
+
 </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
+  const clearAll = document.getElementById('clear');
 
   addItem = function(e) {
     e.preventDefault();
@@ -38,8 +41,8 @@
       done: false,
     };
     items.push(item);
-    populateList(items, itemsList);
     localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
     this.reset();
   };
 
@@ -56,14 +59,27 @@
   };
 
   var toggleDone = function(e) {
-   if(!e.target.matches('input')) return;
-   const el = e.target;
-   const index = el.dataset.index;
-   items[index].done = !items[index].done;
-   localStorage.setItem('items', JSON.stringify(items));
-   populateList(items,itemsList);
+    if (!e.target.matches('input')) return;
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
   };
 
+  var clearAllFunc = function() {
+    localStorage.clear();
+    items.length = 0;
+    populateList(items, itemsList);
+  };
+
+  var toggleAll = function() {
+    Object.keys(items).forEach(function(key) {
+      return items.done = true;
+    });
+  };
+
+  clearAll.addEventListener('click', clearAllFunc);
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
   populateList(items, itemsList);
