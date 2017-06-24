@@ -23,7 +23,8 @@
         <input type="text" name="item" placeholder="Item Name" required>
         <input type="submit" value="+ Add Item">
     </form>
-    <button id="clear">Clear</button> <button id="toggleall">ToggleAll</button>
+    <button id="clear">Clear</button>
+    <button id="toggleall">ToggleAll</button>
 
 </div>
 
@@ -32,6 +33,7 @@
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
   const clearAll = document.getElementById('clear');
+  const toggleAll = document.getElementById('toggleall');
 
   addItem = function(e) {
     e.preventDefault();
@@ -73,15 +75,18 @@
     populateList(items, itemsList);
   };
 
-  var toggleAll = function() {
-    Object.keys(items).forEach(function(key) {
-      return items.done = true;
+  var toggleAllFunc = function() {
+    items.forEach(function(item){
+     return item.done = !item.done;
     });
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
   };
 
   clearAll.addEventListener('click', clearAllFunc);
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  toggleAll.addEventListener('click', toggleAllFunc);
   populateList(items, itemsList);
 
 
