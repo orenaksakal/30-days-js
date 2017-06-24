@@ -25,12 +25,18 @@
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
     font-size: 100px;
   }
   </style>
 
 <script>
+  const body = document.querySelector('body');
+  const h1 = document.querySelector('h1');
+
+  var changeShadow = function(e) {
+    h1.style.textShadow = `${e.screenX/100}px ${e.screenY/100}px 0 rgba(0,0,0,0.4)`;
+  };
+  body.addEventListener('mousemove', changeShadow)
 </script>
 </body>
 </html>
